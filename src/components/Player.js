@@ -75,14 +75,11 @@ export default class Player extends Component {
     super(props);
 
     this.controlsHideTimer = null;
-
     this.video = null; // the Video component
     this.manager = new Manager(props.store);
     this.actions = this.manager.getActions();
-    this.manager.subscribeToPlayerStateChange(
-      this.handleStateChange.bind(this)
-    );
-
+    this.unsubscribe = null;
+    this.handleStateChange = this.handleStateChange.bind(this);
     this.getStyle = this.getStyle.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.getChildren = this.getChildren.bind(this);
@@ -100,6 +97,10 @@ export default class Player extends Component {
     window.addEventListener('resize', this.handleResize);
 
     fullscreen.addEventListener(this.handleFullScreenChange);
+
+    this.unsubscribe = this.manager.subscribeToPlayerStateChange(
+      this.handleStateChange
+    );
   }
 
   componentWillUnmount() {
@@ -108,6 +109,9 @@ export default class Player extends Component {
     fullscreen.removeEventListener(this.handleFullScreenChange);
     if (this.controlsHideTimer) {
       window.clearTimeout(this.controlsHideTimer);
+    }
+    if (this.unsubscribe) {
+      this.unsubscribe();
     }
   }
 

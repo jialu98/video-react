@@ -29,7 +29,8 @@ import {
 import {
   FULLSCREEN_CHANGE,
   PLAYER_ACTIVATE,
-  USER_ACTIVATE
+  USER_ACTIVATE,
+  PLAYER_RESET
 } from '../actions/player';
 
 const initialState = {
@@ -172,6 +173,8 @@ export default function player(state = initialState, action) {
         ...state,
         activeTextTrack: action.textTrack
       };
+    case PLAYER_RESET:
+      return initialState;
     default:
       return state;
   }
