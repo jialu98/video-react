@@ -4,6 +4,7 @@ export const OPERATE = 'video-react/OPERATE';
 export const FULLSCREEN_CHANGE = 'video-react/FULLSCREEN_CHANGE';
 export const PLAYER_ACTIVATE = 'video-react/PLAYER_ACTIVATE';
 export const USER_ACTIVATE = 'video-react/USER_ACTIVATE';
+export const PLAYER_RESET = 'video-react/PLAYER_RESET';
 
 export function handleFullscreenChange(isFullscreen) {
   return {
@@ -23,6 +24,12 @@ export function userActivate(activity) {
   return {
     type: USER_ACTIVATE,
     activity
+  };
+}
+
+export function reset() {
+  return {
+    type: PLAYER_RESET
   };
 }
 

@@ -58,4 +58,5 @@ build
 example/out
 
 # lockfiles
-yarn.lock
+package-lock.json
+.vscode

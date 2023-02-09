@@ -451,6 +451,7 @@ declare module 'video-react' {
     type FULLSCREEN_CHANGE = 'video-react/FULLSCREEN_CHANGE';
     type PLAYER_ACTIVATE = 'video-react/PLAYER_ACTIVATE';
     type USER_ACTIVATE = 'video-react/USER_ACTIVATE';
+    type PLAYER_RESET = 'video-react/PLAYER_RESET';
 
     function handleFullscreenChange(
       isFullscreen: boolean
@@ -464,6 +465,10 @@ declare module 'video-react' {
     ): {
       type: PLAYER_ACTIVATE;
       activity;
+    };
+
+    function reset(): {
+      type: PLAYER_RESET;
     };
 
     function userActivate(

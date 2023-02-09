@@ -12,9 +12,8 @@ export default class Bezel extends Component {
     super(props, context);
 
     this.timer = null;
-    props.manager.subscribeToOperationStateChange(
-      this.handleStateChange.bind(this)
-    );
+    this.unsubscribe = null;
+    this.handleStateChange = this.handleStateChange.bind(this);
 
     this.state = {
       hidden: true,
@@ -22,10 +21,22 @@ export default class Bezel extends Component {
     };
   }
 
+  componentDidMount() {
+    this.unsubscribe = this.props.manager.subscribeToOperationStateChange(
+      this.handleStateChange
+    );
+  }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+  }
+
   handleStateChange(state, prevState) {
     if (
-      state.count !== prevState.count
-      && state.operation.source === 'shortcut'
+      state.count !== prevState.count &&
+      state.operation.source === 'shortcut'
     ) {
       if (this.timer) {
         // previous animation is not finished
@@ -58,8 +69,8 @@ export default class Bezel extends Component {
     }
     const style = this.state.hidden
       ? {
-        display: 'none'
-      }
+          display: 'none'
+        }
       : null;
 
     return (

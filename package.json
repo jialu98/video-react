@@ -17,6 +17,7 @@
     "create-minor": "sh ./scripts/release minor",
     "create-patch": "sh ./scripts/release patch",
     "publish-release": "npm test && sh ./scripts/publish",
+    "publish-dev": "./publish-dev.sh video-react",
     "lint": "eslint src",
     "format-all": "prettier --config .prettierrc.js --write \"src/**/*.{js,json,md}\" \"docs/**/*.{js,json,md}\" \"*.{js,json,md}\"",
     "format-one": "prettier --config .prettierrc.js --write"
